@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Crazy4cats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  
+  <!-- Agrega tu estilo personalizado para cambiar el color del texto del Navbar a blanco -->
+  <style>
+    /* Establece el color del texto a blanco para la clase navbar-content */
+    .navbar-content {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <%= image_tag "catlogo", class: "my-custom-image-class", width: "70px", style: "margin-right: 20px;" %>
+      <a class="navbar-brand">Crazy4cats</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse navbar-content" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to "Publicaciones", publications_path, class: "nav-link" %>
+          </li>
+          <%if user_signed_in?%>
+          <li class="nav-item">
+            <%= link_to current_user.email, edit_user_registration_path, class:"nav-link"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Tus reacciones', my_reactions_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Cerrar sesión', destroy_user_session_path, class: 'nav-link' %>
+          </li>
+          <%else%>
+          <li class="nav-item">
+            <%= link_to "Registrarse", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Iniciar sesión", new_user_session_path, class: "nav-link" %>
+          </li>
+          <%end%>
+          <li class="nav-item">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center py-3">
+    <p>&copy; <%= Time.current.year %> Crazy4cats. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

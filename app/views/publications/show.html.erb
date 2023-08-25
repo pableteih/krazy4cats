@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <%= render "reactions/options" %>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <%= render @publication %>
+      <div class="actions">
+        <% if user_signed_in? %>
+          <% if current_user.id == @publication.user_id %>
+            <div class="d-inline-block">
+              <%= link_to "Editar publicación", edit_publication_path(@publication), class: "btn btn-secondary mr-2" %>
+            </div>
+            <div class="d-inline-block">
+              <%= button_to "Eliminar", @publication, method: :delete, class: "btn btn-secondary mr-2", data: { confirm: "¿Estás seguro de que deseas eliminar esta publicación?" } %>
+            </div>
+          <% end %>
+        <% end %>
+        <%= link_to "Regresar a las publicaciones", publications_path, class: "btn btn-secondary mr-2 " %>
+      </div>
+    </div>
+  </div>
+</div><br/>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h3>Comentarios:</h3>
+
+      <% if @comments.present? %>
+        <% @comments.each do |comment| %>
+          <div class="card comment-card mb-2">
+            <div class="card-body">
+              <p><%= comment.user.email %></p>
+              <%= comment.content %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="comment-form">
+        <%= form_with(model: [@publication, Comment.new]) do |form| %>
+          <div class="form-group">
+            <%= form.text_area :content, class: "form-control" %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Agregar un comentario", class:"btn btn-secondary mt-3" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

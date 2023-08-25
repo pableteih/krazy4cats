@@ -1,0 +1,17 @@
+<h1 class=>Publicaciones</h1>
+
+<hr> 
+
+<div id="publications">
+  <% @publications.each do |publication| %>
+    <%= render publication %>
+    <p>
+      <%= link_to "Ver comentarios", publication, class:"btn btn-dark mt-3" %>
+    </p>
+    <hr> 
+  <% end %>
+</div>
+
+
+<%= link_to "Publicar", new_publication_path, class:"btn btn-dark mt-3" %>
+

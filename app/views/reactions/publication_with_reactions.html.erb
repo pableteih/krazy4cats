@@ -1,0 +1,12 @@
+<h1>Tus reacciones</h1>
+
+<ul>
+  <% @publication.each do |publication| %>
+    <li class="card p-3 mb-3">
+      <%= content_tag :strong, publication.user.email %>
+      <%= publication.tittle %> -
+      <%= publication.reactions.find_by(user_id: current_user.id).kind %>
+      <%= link_to "Ir", publication, class: "btn btn-dark mt-3" %>
+    </li>
+  <% end %>
+</ul>

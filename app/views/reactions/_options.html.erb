@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="btn-group d-flex" role="group">
+    <% Reaction.kinds.each do |kind| %>
+      <% reaction_text = case kind
+        when "like"
+          "Me gusta"
+        when "dislike"
+          "No me gusta"
+        when "funny"
+          "Gracioso"
+        when "angry"
+          "Me enoja"
+        else
+          kind
+        end
+      %>
+      <%= button_to reaction_text, user_reaction_path(publication_id: @publication.id, kind: kind), method: :post, class: "btn btn-primary my-1 mx-1 btn-sm" %>
+    <% end %>
+  </div>
+</div>  

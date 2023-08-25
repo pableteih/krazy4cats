@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div id="<%= dom_id publication %>">
+      <div class="card mb-3 custom-card">
+        <img src="<%= publication.image %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= publication.tittle %></h5>
+          <p class="card-text"><%= publication.content %></p>
+          <p class="card-text"><small class="text-body-secondary"><%= publication.user.email %></small></p>
+          <%= render "reactions/counters" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
